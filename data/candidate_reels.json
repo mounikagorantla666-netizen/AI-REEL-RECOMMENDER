@@ -1,0 +1,38 @@
+[
+  {
+    "id": 101,
+    "title": "DSA Patterns Every Coding Interviewer Expects",
+    "category": "DSA",
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": 102,
+    "title": "How to Build a Real Software Project",
+    "category": "Career",
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": 103,
+    "title": "Git Branching Explained with a Real Project",
+    "category": "Career",
+    "difficulty": "Beginner"
+  },
+  {
+    "id": 104,
+    "title": "Java Collections You Actually Use in Projects",
+    "category": "Java",
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": 105,
+    "title": "AI Agents: From Prompt to Practical Workflow",
+    "category": "AI",
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": 106,
+    "title": "Cloud Deployment Basics for Students",
+    "category": "Cloud",
+    "difficulty": "Beginner"
+  }
+]

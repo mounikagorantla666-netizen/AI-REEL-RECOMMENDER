@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "When Java Code Works on First Try \ud83d\ude04",
+    "caption": "Every Java developer knows this feeling!",
+    "category": "Programming",
+    "watch_percentage": 95,
+    "liked": true,
+    "saved": false,
+    "shared": false
+  },
+  {
+    "id": 2,
+    "title": "Day in the Life of a Software Engineer",
+    "caption": "Coding, debugging, meetings and coffee.",
+    "category": "Career",
+    "watch_percentage": 92,
+    "liked": true,
+    "saved": true,
+    "shared": false
+  },
+  {
+    "id": 3,
+    "title": "Coding Interview Joke \ud83d\ude02",
+    "caption": "When the interviewer asks you to optimize your solution.",
+    "category": "Programming",
+    "watch_percentage": 96,
+    "liked": true,
+    "saved": true,
+    "shared": true
+  },
+  {
+    "id": 4,
+    "title": "Laptop A vs Laptop B for Programmers",
+    "caption": "Which laptop should developers choose?",
+    "category": "Hardware",
+    "watch_percentage": 88,
+    "liked": true,
+    "saved": false,
+    "shared": false
+  },
+  {
+    "id": 5,
+    "title": "Funny College Gaming Moment \ud83c\udfae",
+    "caption": "When your teammate ruins the whole game.",
+    "category": "Gaming",
+    "watch_percentage": 82,
+    "liked": true,
+    "saved": false,
+    "shared": false
+  },
+  {
+    "id": 6,
+    "title": "What Are AI Agents?",
+    "caption": "A beginner-friendly explanation of AI agents.",
+    "category": "AI",
+    "watch_percentage": 90,
+    "liked": true,
+    "saved": true,
+    "shared": false
+  },
+  {
+    "id": 7,
+    "title": "10 AI Tools That Will Get You a Job",
+    "caption": "These AI tools will completely change your career!",
+    "category": "AI Hype",
+    "watch_percentage": 75,
+    "liked": false,
+    "saved": false,
+    "shared": false
+  },
+  {
+    "id": 8,
+    "title": "How Developers Use Git and GitHub",
+    "caption": "Essential workflow every developer should know.",
+    "category": "Software Development",
+    "watch_percentage": 94,
+    "liked": true,
+    "saved": true,
+    "shared": true
+  }
+]
