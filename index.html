@@ -1,252 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Reel Recommender</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
+
 <header class="hero">
-    <div class="badge">✨ AI-POWERED RECOMMENDATION AGENT</div>
+
+    <div class="badge">
+        ✨ AI-POWERED RECOMMENDATION AGENT
+    </div>
+
     <h1>AI Reel Recommender</h1>
-    <p>Turn everyday scrolling into useful technology learning.</p>
-    <button id="analyzeBtn" class="analyze-btn">🔍 Analyze My Reels</button>
-    <p id="status" class="status">Change Reel interactions below, then analyze.</p>
+
+    <p>
+        Turning everyday scrolling into useful technology learning
+    </p>
+
+    <button id="analyzeBtn" class="analyze-btn">
+        🔍 Analyze My Reels
+    </button>
+
 </header>
 
+
 <main>
+
+    <!-- REELS -->
+
     <section class="section">
+
         <div class="section-title">
             <span>🎬</span>
+
             <div>
-                <h2>Interactive Reel Feed</h2>
-                <p>Watch, like, save and share to build the student's interest profile.</p>
+                <h2>Student Reel History</h2>
+                <p>
+                    Adjust interactions to simulate student behavior
+                </p>
             </div>
         </div>
+
 
         <div class="reel-grid">
-            {% for reel in reels %}
-            <article class="reel-card"
-                     data-id="{{ reel.id }}"
-                     data-title="{{ reel.title }}"
-                     data-category="{{ reel.category }}"
-                     data-caption="{{ reel.caption }}">
 
-                <div class="fake-video">
-                    <button class="play-circle watch-btn" aria-label="Watch reel">▶</button>
-                    <span class="video-label">{{ reel.category }}</span>
-                    <span class="watching-label">0%</span>
+            {% for reel in reels %}
+
+            <div class="reel-card"
+                 data-id="{{ reel.id }}">
+
+                <div class="reel-top">
+
+                    <span class="category">
+                        {{ reel.category }}
+                    </span>
+
+                    <span class="watch">
+                        👁 <span class="watch-value">
+                            {{ reel.watch_percentage }}
+                        </span>%
+                    </span>
+
                 </div>
+
 
                 <h3>{{ reel.title }}</h3>
-                <p class="caption">{{ reel.caption }}</p>
 
-                <div class="watch-progress">
-                    <div class="progress-bar">
-                        <div class="progress" style="width: {{ reel.watch_percentage }}%;"></div>
-                    </div>
-                    <div class="watch-row">
-                        <span>Watched <b class="watch-value">{{ reel.watch_percentage }}</b>%</span>
-                        <input class="watch-input" type="range" min="0" max="100"
-                               value="{{ reel.watch_percentage }}" aria-label="Watch percentage">
-                    </div>
-                </div>
+                <p class="caption">
+                    {{ reel.caption }}
+                </p>
+
+
+                <label>
+                    Watch %
+                    <input
+                        class="watch-input"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="{{ reel.watch_percentage }}">
+                </label>
+
 
                 <div class="interaction-buttons">
-                    <button class="interaction like-btn {% if reel.liked %}active{% endif %}">❤️ <span>Like</span></button>
-                    <button class="interaction save-btn {% if reel.saved %}active{% endif %}">💾 <span>Save</span></button>
-                    <button class="interaction share-btn {% if reel.shared %}active{% endif %}">🔗 <span>Share</span></button>
+
+                    <button
+                        class="interaction {% if reel.liked %}active{% endif %}"
+                        data-type="liked">
+                        ❤️ Like
+                    </button>
+
+                    <button
+                        class="interaction {% if reel.saved %}active{% endif %}"
+                        data-type="saved">
+                        💾 Save
+                    </button>
+
+                    <button
+                        class="interaction {% if reel.shared %}active{% endif %}"
+                        data-type="shared">
+                        🔗 Share
+                    </button>
+
                 </div>
-            </article>
+
+            </div>
+
             {% endfor %}
+
         </div>
+
     </section>
+
+
+    <!-- PROCESS -->
 
     <section class="section">
-        <div class="section-title">
-            <span>🧠</span>
-            <div>
-                <h2>How It Works</h2>
-                <p>From scrolling behavior to a useful recommendation.</p>
-            </div>
-        </div>
 
-        <div class="process">
-            <div class="process-step" id="step1">
-                <div class="step-number">1</div>
-                <h3>Observe</h3>
-                <p>Waiting for interaction data...</p>
-            </div>
-            <div class="process-step" id="step2">
-                <div class="step-number">2</div>
-                <h3>Understand</h3>
-                <p>Waiting for interaction data...</p>
-            </div>
-            <div class="process-step" id="step3">
-                <div class="step-number">3</div>
-                <h3>Filter</h3>
-                <p>Waiting for interaction data...</p>
-            </div>
-            <div class="process-step" id="step4">
-                <div class="step-number">4</div>
-                <h3>Recommend</h3>
-                <p>Waiting for interaction data...</p>
-            </div>
-        </div>
-    </section>
+    <div class="section-title">
+        <span>🎬</span>
 
-    <section id="resultSection" class="section result-section hidden">
+        <div>
+            <h2>For You</h2>
+            <p>Interact with Reels to build your interest profile</p>
+        </div>
+    </div>
+
+    <div class="reel-grid">
+
+        {% for reel in reels %}
+
+        <article class="reel-card"
+                 data-id="{{ reel.id }}"
+                 data-title="{{ reel.title }}">
+
+            <div class="fake-video">
+
+                <div class="play-icon">▶</div>
+
+                <div class="video-label">
+                    {{ reel.category }}
+                </div>
+
+            </div>
+
+            <h3>{{ reel.title }}</h3>
+
+            <p class="caption">
+                {{ reel.caption }}
+            </p>
+
+            <div class="watch-progress">
+
+                <div class="progress-bar">
+                    <div class="progress"
+                    </div>
+                </div>
+
+                <span>
+                    Watched
+                    <b class="watch-value">
+                        {{ reel.watch_percentage }}
+                    </b>%
+                </span>
+
+            </div>
+
+            <div class="interaction-buttons">
+
+                <button class="interaction like-btn
+                    {% if reel.liked %}active{% endif %}">
+                    ❤️
+                    <span>Like</span>
+                </button>
+
+                <button class="interaction save-btn
+                    {% if reel.saved %}active{% endif %}">
+                    💾
+                    <span>Save</span>
+                </button>
+
+                <button class="interaction share-btn
+                    {% if reel.shared %}active{% endif %}">
+                    🔗
+                    <span>Share</span>
+                </button>
+
+            </div>
+
+            <button class="watch-btn">
+                ▶ Watch Reel
+            </button>
+
+        </article>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+    <!-- RESULT -->
+
+    <section id="resultSection"
+             class="section"
+             style="display:none;">
+
         <div class="section-title">
+
             <span>🎯</span>
+
             <div>
                 <h2>Final AI Recommendation</h2>
-                <p>Personalized from the student's current behavior.</p>
+                <p>
+                    Personalized from the student's current behavior
+                </p>
             </div>
+
         </div>
 
-        <div class="result-grid">
-            <div class="ai-box">
-                <div class="ai-label">🧠 DETECTED INTEREST</div>
-                <pre id="interest"></pre>
+
+        <div class="recommendation-card">
+
+            <div class="recommendation-icon">
+                🚀
             </div>
-            <div class="recommendation-card">
-                <div class="recommendation-icon">🚀</div>
-                <div>
-                    <div class="recommended-label">AI RECOMMENDATION</div>
-                    <pre id="recommendation"></pre>
+
+            <div class="recommendation-content">
+
+                <div class="recommended-label">
+                    AI RECOMMENDATION
                 </div>
+
+                <pre id="recommendation"></pre>
+
             </div>
+
         </div>
+
+
+        <div class="ai-box">
+
+            <div class="ai-label">
+                🧠 DETECTED INTEREST
+            </div>
+
+            <pre id="interest"></pre>
+
+        </div>
+
     </section>
+
 </main>
 
+
 <footer>
-    <p>🤖 AI Reel Recommender • Interactive Hackathon Prototype</p>
+
+    <p>
+        🤖 AI Reel Recommender • Hackathon Prototype
+    </p>
+
 </footer>
 
+
 <script>
+
 const analyzeBtn = document.getElementById("analyzeBtn");
-const statusEl = document.getElementById("status");
 
-function setStatus(text, type = "") {
-    statusEl.textContent = text;
-    statusEl.className = "status " + type;
-}
 
-function updateStep(id, text) {
-    const step = document.getElementById(id);
-    step.classList.add("active");
-    step.querySelector("p").textContent = text;
-}
+// ================================
+// LIKE / SAVE / SHARE
+// ================================
 
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+document.querySelectorAll(".interaction").forEach(button => {
 
-function updateWatch(card, value) {
-    const percentage = Math.max(0, Math.min(100, Number(value)));
-    card.querySelector(".watch-value").textContent = percentage;
-    card.querySelector(".progress").style.width = percentage + "%";
-    card.querySelector(".watching-label").textContent = percentage + "%";
-}
+    button.addEventListener("click", function () {
 
-document.querySelectorAll(".reel-card").forEach(card => {
-    const slider = card.querySelector(".watch-input");
+        this.classList.toggle("active");
 
-    slider.addEventListener("input", () => updateWatch(card, slider.value));
+        // Small visual feedback
+        this.style.transform = "scale(1.1)";
 
-    card.querySelector(".watch-btn").addEventListener("click", async () => {
-        const button = card.querySelector(".watch-btn");
-        const slider = card.querySelector(".watch-input");
-        button.disabled = true;
-        button.textContent = "⏳";
+        setTimeout(() => {
+            this.style.transform = "scale(1)";
+        }, 150);
 
-        let value = Number(slider.value);
-        const timer = setInterval(() => {
-            value = Math.min(100, value + 5);
-            slider.value = value;
-            updateWatch(card, value);
-
-            if (value >= 100) {
-                clearInterval(timer);
-                button.textContent = "✓";
-                button.disabled = false;
-            }
-        }, 100);
     });
 
-    card.querySelectorAll(".interaction").forEach(button => {
-        button.addEventListener("click", () => {
-            button.classList.toggle("active");
-            button.animate(
-                [{ transform: "scale(1)" }, { transform: "scale(1.12)" }, { transform: "scale(1)" }],
-                { duration: 180 }
-            );
-        });
-    });
 });
+
+
+// ================================
+// WATCH REEL
+// ================================
+
+document.querySelectorAll(".watch-btn").forEach(button => {
+
+    button.addEventListener("click", function () {
+
+        const card =
+            this.closest(".reel-card");
+
+        const progress =
+            card.querySelector(".progress");
+
+        const value =
+            card.querySelector(".watch-value");
+
+        let percentage = 0;
+
+        this.disabled = true;
+
+        this.textContent =
+            "⏳ Watching...";
+
+        const timer = setInterval(() => {
+
+            percentage += 5;
+
+            progress.style.width =
+                percentage + "%";
+
+            value.textContent =
+                percentage;
+
+            if (percentage >= 100) {
+
+                clearInterval(timer);
+
+                this.disabled = false;
+
+                this.textContent =
+                    "✓ Watched";
+
+            }
+
+        }, 150);
+
+    });
+
+});
+
+
+// ================================
+// COLLECT CURRENT USER BEHAVIOR
+// ================================
 
 function getReels() {
-    return [...document.querySelectorAll(".reel-card")].map(card => ({
-        id: Number(card.dataset.id),
-        title: card.dataset.title,
-        category: card.dataset.category,
-        caption: card.dataset.caption,
-        watch_percentage: Number(card.querySelector(".watch-value").textContent),
-        liked: card.querySelector(".like-btn").classList.contains("active"),
-        saved: card.querySelector(".save-btn").classList.contains("active"),
-        shared: card.querySelector(".share-btn").classList.contains("active")
-    }));
-}
 
-analyzeBtn.addEventListener("click", async () => {
-    analyzeBtn.disabled = true;
-    analyzeBtn.textContent = "🧠 AI is analyzing...";
-    setStatus("Reading the latest interactions...", "working");
+    const cards =
+        document.querySelectorAll(".reel-card");
 
-    document.querySelectorAll(".process-step").forEach(step => step.classList.remove("active"));
+    const reels = [];
 
-    try {
-        updateStep("step1", "Reading watch time, likes, saves and shares...");
-        await delay(500);
+    cards.forEach(card => {
 
-        updateStep("step2", "Inferring broader interests and learning intent...");
-        await delay(500);
+        const title =
+            card.dataset.title;
 
-        updateStep("step3", "Filtering hype and low-value recommendations...");
-        await delay(500);
+        const watch =
+            Number(
+                card.querySelector(".watch-value")
+                .textContent
+            );
 
-        const response = await fetch("/analyze", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ reels: getReels() })
+        const liked =
+            card.querySelector(".like-btn")
+            .classList.contains("active");
+
+        const saved =
+            card.querySelector(".save-btn")
+            .classList.contains("active");
+
+        const shared =
+            card.querySelector(".share-btn")
+            .classList.contains("active");
+
+
+        reels.push({
+
+            id: Number(card.dataset.id),
+
+            title: title,
+
+            watch_percentage: watch,
+
+            liked: liked,
+
+            saved: saved,
+
+            shared: shared
+
         });
 
-        const data = await response.json();
+    });
 
-        if (!response.ok || !data.success) {
-            throw new Error(data.error || "Analysis failed.");
+    return reels;
+}
+
+
+// ================================
+// ANALYZE
+// ================================
+
+analyzeBtn.addEventListener("click", async function () {
+
+    this.disabled = true;
+
+    this.textContent =
+        "🧠 AI is thinking...";
+
+
+    // STEP 1
+
+    updateStep(
+        "step1",
+        "Observe",
+        "Reading watch time, likes, saves and shares..."
+    );
+
+    await delay(600);
+
+
+    // STEP 2
+
+    updateStep(
+        "step2",
+        "Understand",
+        "Inferring the student's underlying interests..."
+    );
+
+    await delay(600);
+
+
+    // STEP 3
+
+    updateStep(
+        "step3",
+        "Filter",
+        "Removing irrelevant and hype content..."
+    );
+
+    await delay(600);
+
+
+    // REAL DATA
+
+    const reels = getReels();
+
+
+    try {
+
+        const response =
+            await fetch("/analyze", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+                    reels: reels
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+            throw new Error(data.error);
         }
 
-        updateStep("step4", "Selecting the best technology Reel...");
-        await delay(400);
 
-        document.getElementById("interest").textContent = data.interest;
-        document.getElementById("recommendation").textContent = data.recommendation;
+        // STEP 4
 
-        const result = document.getElementById("resultSection");
-        result.classList.remove("hidden");
-        result.scrollIntoView({ behavior: "smooth", block: "start" });
+        updateStep(
+            "step4",
+            "Recommend",
+            "Selecting the best technology Reel..."
+        );
 
-        setStatus("Recommendation updated from your current interactions.", "success");
+
+        await delay(700);
+
+
+        document.getElementById("interest")
+            .textContent = data.interest;
+
+
+        document.getElementById("recommendation")
+            .textContent = data.recommendation;
+
+
+        document.getElementById("resultSection")
+            .style.display = "block";
+
+
+        document.getElementById("resultSection")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+
     } catch (error) {
-        setStatus("Could not analyze right now: " + error.message, "error");
-    } finally {
-        analyzeBtn.disabled = false;
-        analyzeBtn.textContent = "🔍 Analyze Again";
+
+        alert(
+            "AI error: " + error.message
+        );
+
     }
+
+
+    this.disabled = false;
+
+    this.textContent =
+        "🔍 Analyze Again";
+
 });
+
+
+// ================================
+// HELPERS
+// ================================
+
+function delay(ms) {
+
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+
+}
+
+
+function updateStep(id, title, text) {
+
+    const step =
+        document.getElementById(id);
+
+    step.classList.add("active");
+
+    step.querySelector("p")
+        .textContent = text;
+
+}
+
 </script>
+
 </body>
+
 </html>
